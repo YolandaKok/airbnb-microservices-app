@@ -1,9 +1,11 @@
 package com.yolanda.kokkinou.airbnbservice.entities;
 
 import java.sql.Blob;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Unit {
@@ -14,4 +16,7 @@ public class Unit {
 	private String cancelation_policy;
 	private Integer score;
 	private Blob image;
+	
+	@OneToMany(mappedBy = "unit")
+	private List<Review> reviews;
 }
