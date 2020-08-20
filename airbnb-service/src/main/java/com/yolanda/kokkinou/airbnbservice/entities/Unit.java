@@ -16,6 +16,7 @@ public class Unit {
 	private String cancelation_policy;
 	private Integer score;
 	private Blob image;
+	private String region;
 	
 	@OneToMany(mappedBy = "unit")
 	private List<Review> reviews;
