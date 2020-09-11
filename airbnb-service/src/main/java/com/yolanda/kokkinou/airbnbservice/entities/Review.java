@@ -1,9 +1,6 @@
 package com.yolanda.kokkinou.airbnbservice.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Review {
@@ -13,6 +10,7 @@ public class Review {
 	private Integer score;
 	
 	@ManyToOne
+	@JoinColumn(name = "unit_id", referencedColumnName = "unit_id")
 	private Unit unit;
 	
 	@ManyToOne

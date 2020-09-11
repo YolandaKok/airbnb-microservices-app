@@ -2,10 +2,7 @@ package com.yolanda.kokkinou.airbnbservice.entities;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class UserDTO {
@@ -16,6 +13,6 @@ public class UserDTO {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Review> reviews;
 }
