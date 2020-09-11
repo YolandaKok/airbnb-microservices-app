@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yolanda.kokkinou.airbnbservice.entities.Unit;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/units")
@@ -25,7 +26,7 @@ public class UnitApi {
 	}
 
 	@GetMapping("/test")
-	List<Review> getAll() {
+	Set<Review> getAll() {
 		return service.getAllUnits().get(0).getReviews();
 	}
 }

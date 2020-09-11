@@ -2,6 +2,7 @@ package com.yolanda.kokkinou.airbnbservice.entities;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -17,8 +18,8 @@ public class Unit {
 	private Blob image;
 	private String region;
 	
-	@OneToMany(mappedBy = "unit", fetch = FetchType.EAGER, targetEntity = Review.class)
-	private List<Review> reviews;
+	@OneToMany(mappedBy = "unit", orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<Review> reviews;
 
 	public Long getId() {
 		return id;
@@ -76,11 +77,11 @@ public class Unit {
 		this.region = region;
 	}
 
-	public List<Review> getReviews() {
+	public Set<Review> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 	

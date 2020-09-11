@@ -11,6 +11,8 @@ import com.yolanda.kokkinou.airbnbservice.entities.Unit;
 import com.yolanda.kokkinou.airbnbservice.repositories.UnitRepository;
 import com.yolanda.kokkinou.airbnbservice.services.UnitService;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UnitServiceImpl implements UnitService {
 
@@ -18,11 +20,13 @@ public class UnitServiceImpl implements UnitService {
 	private UnitRepository repo;
 
 	@Override
+	@Transactional
 	public Page<Unit> getAllUnits(Pageable page) {
 		return repo.findAll(page);
 	}
 
 	@Override
+	@Transactional
 	public List<Unit> getAllUnits() {
 		return repo.findAll();
 	}
