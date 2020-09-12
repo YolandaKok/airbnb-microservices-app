@@ -1,8 +1,10 @@
 package com.yolanda.kokkinou.airbnbservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.yolanda.kokkinou.airbnbservice.dto.ErrorResult;
 import com.yolanda.kokkinou.airbnbservice.dto.ReviewDto;
 import com.yolanda.kokkinou.airbnbservice.endpoints.ReviewApi;
 import com.yolanda.kokkinou.airbnbservice.services.ReviewService;
@@ -16,11 +18,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import javax.persistence.EntityManagerFactory;
 
 import java.nio.charset.Charset;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -56,5 +60,47 @@ public class ReviewTests {
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void create_stars_less_than_zero() throws Exception {
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setComment("Hello");
+        reviewDto.setScore(-3);
+        reviewDto.setUnitId(1L);
+        reviewDto.setUserId(1L);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(reviewDto);
+
+        MvcResult mvcResult = this.mockMvc
+                .perform(post("/api/reviews")
+                        .contentType(APPLICATION_JSON_UTF8)
+                        .content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    public void create_stars_greater_than_five() throws Exception {
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setComment("Hello");
+        reviewDto.setScore(8);
+        reviewDto.setUnitId(1L);
+        reviewDto.setUserId(1L);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(reviewDto);
+
+        MvcResult mvcResult = this.mockMvc
+                .perform(post("/api/reviews")
+                        .contentType(APPLICATION_JSON_UTF8)
+                        .content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andReturn();
     }
 }
