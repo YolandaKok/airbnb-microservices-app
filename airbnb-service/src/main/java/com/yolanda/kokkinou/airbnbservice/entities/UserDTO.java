@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 public class UserDTO {
 	@Id
+	@GeneratedValue
 	private Long id;
 	@Column(name = "USERNAME")
 	private String username;

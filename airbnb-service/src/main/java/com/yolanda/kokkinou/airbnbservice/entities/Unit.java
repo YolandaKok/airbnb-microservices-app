@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 public class Unit {
 	@Id
+	@GeneratedValue
 	@Column(name = "unit_id")
 	private Long id;
 	private String title;

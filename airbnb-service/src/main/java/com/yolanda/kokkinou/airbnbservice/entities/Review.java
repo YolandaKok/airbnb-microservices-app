@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Review {
 	@Id
+	@GeneratedValue
 	private Long id;
 	private String comment;
 	private Integer score;
