@@ -2,6 +2,7 @@ package com.yolanda.kokkinou.airbnbservice.endpoints;
 
 import com.yolanda.kokkinou.airbnbservice.dto.ReviewDto;
 import com.yolanda.kokkinou.airbnbservice.entities.Review;
+import com.yolanda.kokkinou.airbnbservice.enums.ErrorCodes;
 import com.yolanda.kokkinou.airbnbservice.exceptions.ApiException;
 import com.yolanda.kokkinou.airbnbservice.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class ReviewApi {
     @PreAuthorize("isAuthenticated()")
     public void create(@RequestBody ReviewDto review) {
         if(review.getScore() < 0)
-            throw new ApiException("SCORE_LESS_THAN_ZERO_STARS");
+            throw new ApiException(ErrorCodes.SCORE_LESS_THAN_ZERO_STARS.toString());
         if(review.getScore() > 5)
-            throw new ApiException("SCORE_GREATER_THAN_FIVE_STARS");
+            throw new ApiException(ErrorCodes.SCORE_GREATER_THAN_FIVE_STARS.toString());
         service.create(review);
     }
 }

@@ -4,6 +4,8 @@ import com.yolanda.kokkinou.airbnbservice.dto.ReviewDto;
 import com.yolanda.kokkinou.airbnbservice.entities.Review;
 import com.yolanda.kokkinou.airbnbservice.entities.Unit;
 import com.yolanda.kokkinou.airbnbservice.entities.UserDTO;
+import com.yolanda.kokkinou.airbnbservice.enums.ErrorCodes;
+import com.yolanda.kokkinou.airbnbservice.exceptions.ApiException;
 import com.yolanda.kokkinou.airbnbservice.repositories.ReviewRepository;
 import com.yolanda.kokkinou.airbnbservice.repositories.UnitRepository;
 import com.yolanda.kokkinou.airbnbservice.repositories.UserRepository;
@@ -37,10 +39,14 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public void create(ReviewDto reviewDto) {
         Review review = new Review();
-        // TODO: if user does not exist throw exception
         Optional<UserDTO> user = userRepo.findById(reviewDto.getUserId());
-        // TODO: if review does not exist throw exception
+        if(!user.isPresent()) {
+            throw new ApiException(ErrorCodes.USER_NOT_FOUND.toString());
+        }
         Optional<Unit> unit = unitRepo.findById(reviewDto.getUnitId());
+        if(!unit.isPresent()) {
+            throw new ApiException(ErrorCodes.UNIT_NOT_FOUND.toString());
+        }
         review.setComment(reviewDto.getComment());
         review.setScore(reviewDto.getScore());
         review.setUser(user.get());
