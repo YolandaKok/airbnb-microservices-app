@@ -5,6 +5,7 @@ import com.yolanda.kokkinou.airbnbservice.entities.Review;
 import com.yolanda.kokkinou.airbnbservice.exceptions.ApiException;
 import com.yolanda.kokkinou.airbnbservice.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ReviewApi {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
+    @PreAuthorize("isAuthenticated()")
     public void create(@RequestBody ReviewDto review) {
         if(review.getScore() < 0)
             throw new ApiException("SCORE_LESS_THAN_ZERO_STARS");

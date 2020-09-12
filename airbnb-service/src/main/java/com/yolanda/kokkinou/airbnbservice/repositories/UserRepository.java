@@ -7,5 +7,5 @@ import com.yolanda.kokkinou.airbnbservice.entities.UserDTO;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserDTO, Long> {
-
+    UserDTO findByUsername(String username);
 }
