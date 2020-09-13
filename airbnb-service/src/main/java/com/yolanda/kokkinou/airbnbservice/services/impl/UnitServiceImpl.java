@@ -26,6 +26,21 @@ public class UnitServiceImpl implements UnitService {
 	}
 
 	@Override
+	public Page<Unit> getAllUnitsRegion(Pageable page, String region) {
+		return repo.findByRegion(region, page);
+	}
+
+	@Override
+	public Page<Unit> getAllUnitsTitle(Pageable page, String title) {
+		return repo.findByTitle(title, page);
+	}
+
+	@Override
+	public Page<Unit> getAllUnitsRegionAndTitle(Pageable page, String title, String region) {
+		return repo.findByRegionAndTitle(region, title, page);
+	}
+
+	@Override
 	@Transactional
 	public List<Unit> getAllUnits() {
 		return repo.findAll();
