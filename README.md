@@ -43,3 +43,13 @@ after the execution of this request
 POST localhost:8081/login
 Body {"username": "x", password: "x"}
 ```
+
+### Get Units
+- You can optionally filter units using their region or/and title
+```
+GET localhost:8081/api/units?region=Athens&title=Cool+Loft
+```
+
+## Db Initialization Data
+* In src/main/resources/sql you can find a script this test data 
+to insert to your database instance (MySQL)
