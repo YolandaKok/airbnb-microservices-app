@@ -51,5 +51,7 @@ GET localhost:8081/api/units?region=Athens&title=Cool+Loft
 ```
 
 ## Db Initialization Data
-* In src/main/resources/sql you can find a script this test data 
+* In airbnb-service/src/main/resources/sql you can find a script this test data 
 to insert to your database instance (MySQL)
+* You should have created 2 users in advance
+- Happy Coding
