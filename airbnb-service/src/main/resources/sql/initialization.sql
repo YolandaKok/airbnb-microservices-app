@@ -1,6 +1,3 @@
-insert into userdto values(1,'','yolanda');
-insert into userdto values(2,'','eleni');
-
 INSERT INTO unit(unit_id,title,description,cancelation_policy,score,image,region) VALUES (1,'Samos Apartments', 'Luxurious Apartments for rent in Vathi','FLEXIBLE',5,null,'Samos');
 INSERT INTO unit(unit_id,title,description,cancelation_policy,score,image,region) VALUES (2,'Athens Loft', 'Loft in Koukaki, near Acropolis','MODERATE',5,null,'Athens');
 INSERT INTO unit(unit_id,title,description,cancelation_policy,score,image,region) VALUES (3,'Peristeri Apartment', 'Near metro station','FLEXIBLE',3,null,'Peristeri');
