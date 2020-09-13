@@ -21,6 +21,10 @@ public class Review {
 	@ManyToOne
 	private UserDTO user;
 
+	public Review() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

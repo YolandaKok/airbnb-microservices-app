@@ -22,6 +22,21 @@ public class Unit {
 	@OneToMany(mappedBy = "unit", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Review> reviews;
 
+	public Unit() {
+
+	}
+
+	public Unit(Long id, String title, String description, String cancelation_policy, Integer score, Blob image, String region, Set<Review> reviews) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.cancelation_policy = cancelation_policy;
+		this.score = score;
+		this.image = image;
+		this.region = region;
+		this.reviews = reviews;
+	}
+
 	public Long getId() {
 		return id;
 	}

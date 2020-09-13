@@ -6,6 +6,6 @@ import com.yolanda.kokkinou.airbnbservice.entities.Review;
 import java.util.List;
 
 public interface ReviewService {
-    public List<Review> getAllReviews();
-    public void create(ReviewDto reviewDto);
+    List<Review> getAllReviews();
+    void create(ReviewDto reviewDto);
 }
